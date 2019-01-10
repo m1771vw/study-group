@@ -127,3 +127,106 @@ let products = [
  *  - How can you use separation of concerns to approach a large problem like this?
  *  - How many functions should you expect to have roughly before you even begin solving this problem?
  */
+
+
+/**
+ * 1. New Array
+ * 2. Loop through the original array
+ * 3. Return new array after sorting based on the keyword and order
+ * 4. 
+ * 
+ */
+
+
+let products = [
+  {
+    name: 'green wayfarer',
+    price: 50,
+    sku: 1234321
+  },
+  {
+    name: 'red wayfarer',
+    price: 45.99,
+    sku: 1234322
+  },
+  {
+    name: 'plastic wayfarer',
+    price: 30.99,
+    sku: 1234323
+  },
+  {
+    name: 'red aviator',
+    price: 120.99,
+    sku: 1234324
+  },
+]
+
+const nameSort = (arr, order) => {
+  if(order == 'descending') {
+    return arr.sort((a, b) =>  ('' + b.name).localeCompare(a.name))
+  } else {
+  return arr.sort((a, b) => {
+    return ('' + a.name).localeCompare(b.name);
+})
+  }
+}
+
+const numSort = (arr, keyword, order) => {
+  if(order == 'ascending') {
+      return arr.sort((a,b) => {
+    return a[keyword] - b[keyword];
+  })
+  } else {
+    return arr.sort((a,b) => {
+    return b[keyword] - a[keyword];
+  })
+  }
+}
+
+const reducedSearch = (arr, keyword, srch) => {
+  let reducedArr = [];
+  for(let i = 0; i < arr.length; i++) {
+    if(typeof srch == 'string') {
+      if(arr[i][keyword].includes(srch)) {
+        reducedArr.push(arr[i]);
+      }
+    } else if (typeof srch == 'number') {
+      if(arr[i][keyword] === srch) {
+        reducedArr.push(arr[i])
+      }
+    }
+  }
+  return reducedArr;
+}
+
+const search = (arr, keyword, order, srch=null) => {
+  if(srch != null) {
+    arr = reducedSearch(arr, keyword, srch);
+  }
+  if(keyword == 'name') {
+    return nameSort(arr, order);
+  } else {
+    return numSort(arr, keyword, order);
+  }
+}
+
+
+
+console.log("Price, Ascending");
+console.log(search(products, 'price', 'ascending'))
+console.log("===============================");
+console.log("Price, Ascending");
+console.log(search(products, 'price', 'descending'))
+console.log("===============================");
+console.log("SKU, Ascending");
+console.log(search(products, 'sku', 'ascending'))
+console.log("===============================");
+console.log("SKU, Ascending");
+console.log(search(products, 'sku', 'descending'))
+console.log("===============================");
+console.log("Name, Ascending, wayfarer");
+console.log(search(products, 'name', 'ascending', 'wayfarer'))
+console.log("===============================");
+console.log("Name, ascending", "red");
+console.log(search(products, 'name', 'ascending', 'red'))
+console.log("===============================");

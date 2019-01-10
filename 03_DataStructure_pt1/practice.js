@@ -32,3 +32,11 @@ let text = "In nova fert animus mutatas dicere formas corpora; di, coeptis (nam 
  * Tip:
  * - What data are we concerned with keeping track of as we go through the string?
  */
+
+ /**
+ * 1. New String
+ * 2. Loop over it
+ * 3. Keep track letter
+ * 4. Keep track of how many times that letter shows up
+ * 5. Append the letter and the number to the new
+ */
